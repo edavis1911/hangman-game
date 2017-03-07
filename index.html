@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<!-- Latest compiled and minified CSS -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+
+<!-- Optional theme -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
+
+<!-- Latest compiled and minified JavaScript -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+	<link rel="stylesheet" type="text/css" href="assets/css/style.css">
+	<link href="https://fonts.googleapis.com/css?family=Nosifer" rel="stylesheet">
+	<link rel="stylesheet" href="assets/javascript/game.js">
+	<script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
+	
+	<title>Hangman Game</title>
+</head>
+<body>
+	<h1>Jigsaw's Revenge!!!</h1>
+	<div class="container">
+	<div class="row"></div>
+	<div class="col-md-4"></div>
+	<div class="col-md-4">
+	<div class="panel panel-default">
+  	<div id="startGame" class="panel-body">Panel Content</div>
+ 	</div>		
+ 			</div>
+		</div>
+	<div class="col-md-4"></div>
+	</div>
+
+
+	<audio autoplay="autoplay">
+		<source src="assets/images/i-want-to-play-a-game.mp3" type="audio/mpeg"> 
+	
+	
+	
+
+
+	</audio>
+
+	<script type="text/javascript">
+		$(document).ready(function() {
+
+		    // Hide the div
+		    $("#startGame").hide();
+
+		    // Show the div in 5s
+		    $("#startGame").delay(5000).fadeIn(500);
+
+		});
+
+	</script>
+
+
+	
+	
+</body>
+</html>
