@@ -1,95 +1,117 @@
 // List of words for game
-var guessWord = ["Jigsaw","Blood","Game","Live", "Die", "Live or Die Make your Choice", "Game Over", "Pain", "Death", "You think it is over, but the games have just begun"];
+var guessWord = ["Jigsaw","Blood","Game","Live", "Die", "Live or Die Make your Choice", "Game Over", "Pain", "Death"];
 
-// Solved words
-var chosenWord = "";
+// Holds the solution word
+var selectedWord ="";
 
-//Blank
+// Breaks the selectedWord into individual characters and places it in array as indexed letters
+var selectedWordLetters = [];
+
+// This variable holds the number of characters for the selected Word
 var numBlanks = 0;
 
-var blanksandChosen = [];
-
+// Hold all letters the user guessed incorrectly from the selected Word
 var wrongGuess= [];
 
-// Starts game
+// Holds all letters chosen and not chosen by the user
+var blanksandChosen = [];
+
+// Split letters
+var letterInGuess ="";
+
+// Game Counters
+var winCount = 0; 
+var lossCount = 0;
+var numGuesses = 9;
 
 
+// Hangman game logic when game begins
 function startGame() {
+	// Sets the number of guesses to 9 every time the user starts the game
+	numGuesses = 9;
 
-nunGuesses = 0;
+	// For user input
+	var userLetter ="";
 
+	console.log(letterInGuess);
 
-}
-// Selects random word from guessWord array
-var randomWord = Math.floor((Math.random()*(guessWord.length-1))); 
+	
 
+	// Stores correct user input
+	var correctLetter ="";
 
-var displayWord = guessWord[random]; // the word to guess will be chosen from the array above
-var correctWord = new Array(displayWord.length);
-var f = 0;
+	// Word the user has to guess from is randomly chosen from the array
+	var randomWord = guessWord[Math.floor(Math.random()*(guessWord.length))]; 
 
-// every letter in the word is symbolized by an underscore in the guessfield
-for (var i = 0; i < ratewort.length; i++){
-	ratewort[i] = "_ ";
-}
+	// Splits the guessWord into indiviual characters
+	selectedWordLetters = randomWord.split("");
 
-// prints the guessfield
-function printRatewort(){
-	for (var i = 0; i < ratewort.length; i++){
-	var ratefeld = document.getElementById("ratefeld");
-	var buchstabe = document.createTextNode(ratewort[i]);
-	ratefeld.appendChild(buchstabe);
-	}
+	// Counts and holds the amount of split letters from random array word
+	numBlanks = selectedWordLetters.length;
+
+	// Converts all letters entered into upper case. This allows the conditional statements to work regardless of case.
+	userLetter = userLetter.toUpperCase();
+
+	// Emptys the array of blank and chosesn letters 
+	blanksandChosen = []; 
+
+	// Sets wrong guesses to none
+	wrongGuess = [];
+
+	// Replaces the characters for the randomly chosen word from the array with underscores
+	for (var i = 0; i < numBlanks; i++) {
+		blanksandChosen.push("_ ");
+	};
+
+	// Displays the number of guesses on the DOM at beginning of round
+	document.getElementById("guesses-remaining").innerHTML = numGuesses;
+
+	// Displays the random word into split characters on the DOM at the beginning of round
+	document.getElementById("blank-letters").innerHTML = blanksandChosen.join("");
+
+	// Displays the number of incorrect attempts remaining before game is over
+	document.getElementById("guesses-remaining").innerHTML = wrongGuess.join("");
+	
 }
 
 //checks if the the letter provided by the user matches one or more of the letters in the word
-var pruefeZeichen = function(){
-	var f = document.rateformular; 
-	var b = f.elements["ratezeichen"]; 
-	var zeichen = b.value; // the letter provided by the user
-	zeichen = zeichen.toUpperCase();
-	for (var i = 0; i < lsgwort.length; i++){
-		if(lsgwort[i] === zeichen){
-			ratewort[i] = zeichen + " ";
-			var treffer = true;
+	function checkLetters (letter) {
+		var letterInGuess = false;
+		for (var i = 0; i < numBlanks; i++) {
+			if(selectedWordLetters[i] === userLetter) {
+				correctLetter[i] = userLetter + " ";
+				var letterInGuess = true;				
+
+				}
+			}
 		}
-	b.value = "";
+
+	// if a guessed letter is not in the word, the letter will be put on the "wrong letters"-list and number of remaining guesses is reduced by 1.
+	if(!letterInGuess) {
+		var wrongLetter = document.getElementById("guessedLetter");
+		var userGuess = document.createTextNode(" " + userGuess);
+		guessedLetter.appendChild(userGuess); 
+		numGuesses--;
 	}
-	
-	//deletes the guessfield and replaces it with the new one
-	var ratefeld = document.getElementById("ratefeld");
-	ratefeld.innerHTML=""; 
-	printRatewort();
-	
-	// if a guessed letter is not in the word, the letter will be put on the "wrong letters"-list and hangman grows
-	if(!treffer){
-		var gerateneBuchstaben = document.getElementById("gerateneBuchstaben");
-		var buchstabe = document.createTextNode(" " + zeichen);
-		gerateneBuchstaben.appendChild(buchstabe); 
-		fehler++;
-		var hangman = document.getElementById("hangman");
-    hangman.src = "http://www.writteninpencil.de/Projekte/Hangman/hangman" + fehler + ".png";
-	}
+		
 	
 	//checks if all letters have been found
-	var fertig = true;
-	for (var i = 0; i < ratewort.length; i++){
-		if(ratewort[i] === "_ "){
-			fertig = false;
+	var userWins = true;
+	for (var i = 0; i < guessWord.length; i++) {
+		if(guessWord[i] === "_ "){
+			youWon = false;
 		}
 	}
-	if(fertig){
-		window.alert("You win!");
+
+	if(userWins){
+		winCount++;
+		startGame();
 	}
 	
-	//once you got six wrong letters, you lose
-	if(fehler === 6){
-		window.alert("Uh...I guess you're dead now.");
+	if (numBlanks === 9){
+		var audio = new Audio('../images/gameOver.mp3');
+		audio.play();
 	}
-}
+	
 
-function init(){
-	printRatewort();
-}
 
-window.onload = init;
